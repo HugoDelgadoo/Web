@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Entorno
+.env
+
+# Angular / Node
+node_modules/
+dist/
+.angular/

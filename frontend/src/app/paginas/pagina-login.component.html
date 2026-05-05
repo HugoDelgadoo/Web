@@ -1,0 +1,18 @@
+<section class="pantalla-login">
+  <article class="tarjeta-login">
+    <h2>Iniciar Sesión</h2>
+    <p>Accede con tus credenciales de empleado o administrador.</p>
+
+    <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="usuario@super.local" />
+
+      <label>Contraseña</label>
+      <input type="password" formControlName="clave_acceso" placeholder="********" />
+
+      <button type="submit" [disabled]="cargando">{{ cargando ? 'Entrando...' : 'Entrar' }}</button>
+    </form>
+
+    <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+  </article>
+</section>

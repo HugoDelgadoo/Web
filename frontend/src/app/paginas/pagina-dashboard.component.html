@@ -1,0 +1,28 @@
+<section class="cabecera-modulo">
+  <h2>Dashboard</h2>
+  <p>Vista general del rendimiento diario y acumulado del supermercado.</p>
+</section>
+
+<section class="panel-kpis">
+  <article class="kpi">
+    <p>Ventas del día</p>
+    <strong>{{ resumen.ventas_del_dia | number:'1.2-2' }} €</strong>
+  </article>
+  <article class="kpi">
+    <p>Total acumulado</p>
+    <strong>{{ resumen.total_acumulado | number:'1.2-2' }} €</strong>
+  </article>
+  <article class="kpi alerta">
+    <p>Alertas stock bajo</p>
+    <strong>{{ resumen.alertas_stock_bajo }}</strong>
+  </article>
+</section>
+
+<section class="tarjeta-grafico">
+  <h3>Tendencia diaria de ventas</h3>
+  <div class="contenedor-grafico">
+    <canvas baseChart [data]="configuracionLinea" [options]="opcionesGrafico" [type]="'line'"></canvas>
+  </div>
+</section>
+
+<p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>

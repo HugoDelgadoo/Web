@@ -1,0 +1,78 @@
+<section class="cabecera-modulo">
+  <div>
+    <h2>Inventario de Productos</h2>
+    <p>Controla stock, precio y disponibilidad en tiempo real.</p>
+  </div>
+</section>
+
+<section class="panel-kpis">
+  <article class="kpi">
+    <p>Total productos</p>
+    <strong>{{ cantidadProductos }}</strong>
+  </article>
+  <article class="kpi">
+    <p>Stock total</p>
+    <strong>{{ stockTotal }}</strong>
+  </article>
+  <article class="kpi">
+    <p>Valor inventario</p>
+    <strong>{{ valorInventario | number:'1.2-2' }} €</strong>
+  </article>
+</section>
+
+<section class="tarjeta">
+  <h3>Nuevo producto</h3>
+
+  <form [formGroup]="formularioProducto" (ngSubmit)="crearProducto()" class="formulario">
+    <label>
+      Nombre
+      <input type="text" formControlName="nombre" />
+      <small *ngIf="formularioProducto.controls['nombre'].touched && formularioProducto.controls['nombre'].invalid">
+        El nombre es obligatorio y debe tener al menos 2 caracteres.
+      </small>
+    </label>
+
+    <label>
+      Precio
+      <input type="number" step="0.01" formControlName="precio" />
+      <small *ngIf="formularioProducto.controls['precio'].touched && formularioProducto.controls['precio'].invalid">
+        El precio debe ser mayor que 0.
+      </small>
+    </label>
+
+    <label>
+      Stock
+      <input type="number" formControlName="stock" />
+      <small *ngIf="formularioProducto.controls['stock'].touched && formularioProducto.controls['stock'].invalid">
+        El stock no puede ser negativo.
+      </small>
+    </label>
+
+    <button type="submit">Guardar producto</button>
+  </form>
+
+  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+  <p class="exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+</section>
+
+<section class="tarjeta">
+  <h3>Listado de inventario</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

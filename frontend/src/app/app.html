@@ -1,0 +1,34 @@
+<div class="fondo-app">
+  <ng-container *ngIf="autenticado; else vistaLogin">
+    <header class="barra-superior">
+      <div>
+        <h1>{{ nombreAplicacion }}</h1>
+      </div>
+      <div class="usuario-info">
+        <strong>{{ usuarioNombre }}</strong>
+        <span>{{ rolActual }}</span>
+        <button type="button" (click)="cerrarSesion()">Salir</button>
+      </div>
+    </header>
+
+    <div class="panel-principal">
+      <aside class="barra-lateral">
+        <a *ngIf="rolActual === 'Admin'" routerLink="/dashboard" routerLinkActive="activo">Dashboard</a>
+        <a routerLink="/productos" routerLinkActive="activo">Inventario</a>
+        <a routerLink="/ventas" routerLinkActive="activo">Ventas</a>
+        <a *ngIf="rolActual === 'Admin'" routerLink="/usuarios" routerLinkActive="activo">Usuarios y Roles</a>
+        <a routerLink="/proveedores" routerLinkActive="activo">Proveedores</a>
+        <a *ngIf="rolActual === 'Admin'" routerLink="/compras" routerLinkActive="activo">Compras</a>
+        <a routerLink="/caducidad" routerLinkActive="activo">Caducidad</a>
+      </aside>
+
+      <main class="contenido">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </ng-container>
+
+  <ng-template #vistaLogin>
+    <router-outlet></router-outlet>
+  </ng-template>
+</div>

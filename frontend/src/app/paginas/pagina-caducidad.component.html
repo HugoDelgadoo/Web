@@ -1,0 +1,19 @@
+<section class="tarjeta">
+  <h2>Control de Caducidad</h2>
+  <p>Productos que caducan en menos de 7 días.</p>
+  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+</section>
+
+<section class="tarjeta">
+  <table>
+    <thead><tr><th>Producto</th><th>Stock</th><th>Caduca</th><th>Días restantes</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let producto of productos" class="fila-alerta">
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.stock }}</td>
+        <td>{{ producto.fecha_caducidad | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ $any(producto).dias_para_caducar }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
