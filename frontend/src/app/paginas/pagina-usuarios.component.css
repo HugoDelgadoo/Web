@@ -1,7 +1,8 @@
-.tarjeta { background: #fff; border: 1px solid #d8e4f3; border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(32,63,112,.07); }
+.tarjeta { background: rgba(17, 29, 54, 0.72); border: 1px solid rgba(134, 163, 255, 0.24); border-radius: 12px; padding: 18px; margin-bottom: 16px; box-shadow: 0 16px 34px rgba(0,0,0,.28); backdrop-filter: blur(8px); }
 .formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
-input, select { padding: 8px; border: 1px solid #c6d7ee; border-radius: 8px; }
+input, select { padding: 8px; border: 1px solid rgba(146, 174, 255, 0.3); border-radius: 8px; background: rgba(11, 21, 42, 0.7); color: #eaf0ff; }
 button { padding: 10px 14px; border: 0; border-radius: 8px; background: linear-gradient(135deg,#2f7cf6,#245fcc); color: #fff; font-weight: 700; }
 table { width: 100%; border-collapse: collapse; }
-th, td { border-bottom: 1px solid #e7edf7; text-align: left; padding: 10px 8px; }
-.error { color: #b43737; } .exito { color: #1f7d32; }
+th, td { border-bottom: 1px solid rgba(129, 160, 239, 0.22); text-align: left; padding: 10px 8px; }
+th { color: #99b3e8; }
+.error { color: #ff8f8f; } .exito { color: #8cf0a1; }

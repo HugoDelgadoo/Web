@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Producto } from '../modelos/producto';
+import { I18nPipe } from '../pipes/i18n.pipe';
 import { ProductosApiService } from '../servicios/productos-api.service';
 
 @Component({
   selector: 'app-pagina-productos',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nPipe],
   templateUrl: './pagina-productos.component.html',
   styleUrl: './pagina-productos.component.css'
 })
@@ -55,7 +56,7 @@ export class PaginaProductosComponent implements OnInit {
         this.mensajeError = '';
       },
       error: () => {
-        this.mensajeError = 'No se pudieron cargar los productos.';
+        this.mensajeError = 'err_products_load';
       }
     });
   }
@@ -77,12 +78,12 @@ export class PaginaProductosComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.mensajeExito = 'Producto creado correctamente.';
+          this.mensajeExito = 'ok_product_create';
           this.formularioProducto.reset({ nombre: '', precio: 0, stock: 0 });
           this.cargarProductos();
         },
         error: () => {
-          this.mensajeError = 'No se pudo crear el producto.';
+          this.mensajeError = 'err_product_create';
         }
       });
   }

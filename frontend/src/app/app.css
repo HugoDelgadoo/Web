@@ -6,10 +6,10 @@
 .fondo-app {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 90% 10%, #dbe9ff 0%, transparent 35%),
-    radial-gradient(circle at 10% 90%, #d9f2e6 0%, transparent 30%),
-    #f3f7fb;
-  color: #172b4d;
+    radial-gradient(circle at 85% 12%, rgba(51, 113, 255, 0.35) 0%, transparent 35%),
+    radial-gradient(circle at 8% 88%, rgba(120, 207, 255, 0.2) 0%, transparent 35%),
+    linear-gradient(180deg, #091225 0%, #0d1a33 50%, #0a1429 100%);
+  color: #e7eeff;
   font-family: "Manrope", "Segoe UI", sans-serif;
 }
 
@@ -22,33 +22,42 @@
   align-items: center;
 }
 
+.barra-superior h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
 .usuario-info {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #fff;
-  border: 1px solid #d8e4f3;
-  border-radius: 10px;
-  padding: 8px 10px;
+  background: rgba(19, 31, 58, 0.72);
+  border: 1px solid rgba(134, 163, 255, 0.28);
+  border-radius: 12px;
+  padding: 8px 12px;
+  backdrop-filter: blur(6px);
 }
 
 .usuario-info span {
-  color: #4f6b96;
+  color: #8da9df;
   font-size: 13px;
   font-weight: 700;
 }
 
 .usuario-info button {
-  border: 1px solid #c6d7ee;
+  border: 1px solid rgba(130, 170, 255, 0.35);
   border-radius: 8px;
   padding: 5px 10px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e7eeff;
   cursor: pointer;
 }
 
-.barra-superior h1 {
-  margin: 0;
-  font-size: 24px;
+.usuario-info .boton-idioma {
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .panel-principal {
@@ -60,36 +69,63 @@
   padding: 8px 20px 28px;
 }
 
+.panel-principal.panel-login {
+  display: block;
+  max-width: none;
+  padding: 0;
+}
+
 .barra-lateral {
-  background: #ffffff;
-  border: 1px solid #d8e4f3;
+  background: rgba(14, 24, 46, 0.74);
+  border: 1px solid rgba(134, 163, 255, 0.24);
   border-radius: 16px;
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   height: fit-content;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
 }
 
 .barra-lateral a {
   text-decoration: none;
-  color: #304c75;
-  padding: 10px 12px;
+  color: #c3d6ff;
+  padding: 11px 12px;
   border-radius: 8px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .barra-lateral a:hover {
-  background: #f2f7ff;
+  background: rgba(105, 145, 255, 0.14);
 }
 
 .barra-lateral a.activo {
-  background: linear-gradient(135deg, #2f7cf6 0%, #245fcc 100%);
+  background: linear-gradient(135deg, #2f7cf6 0%, #3f5eff 100%);
   color: #fff;
+  box-shadow: 0 8px 18px rgba(47, 124, 246, 0.35);
 }
 
 .contenido {
   display: block;
+}
+
+.contenido-login {
+  position: relative;
+  min-height: 100vh;
+}
+
+.boton-idioma-login {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  border: 1px solid rgba(130, 170, 255, 0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: rgba(18, 30, 57, 0.9);
+  color: #e7eeff;
+  cursor: pointer;
+  z-index: 20;
 }
 
 @media (max-width: 900px) {

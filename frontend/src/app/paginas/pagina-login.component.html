@@ -1,18 +1,18 @@
 <section class="pantalla-login">
   <article class="tarjeta-login">
-    <h2>Iniciar Sesión</h2>
-    <p>Accede con tus credenciales de empleado o administrador.</p>
+    <h2>{{ 'login_title' | i18n }}</h2>
+    <p>{{ 'login_subtitle' | i18n }}</p>
 
     <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
-      <label>Email</label>
-      <input type="email" formControlName="email" placeholder="usuario@super.local" />
+      <label>{{ 'user' | i18n }}</label>
+      <input type="text" formControlName="email" [placeholder]="'user' | i18n" />
 
-      <label>Contraseña</label>
+      <label>{{ 'password' | i18n }}</label>
       <input type="password" formControlName="clave_acceso" placeholder="********" />
 
-      <button type="submit" [disabled]="cargando">{{ cargando ? 'Entrando...' : 'Entrar' }}</button>
+      <button type="submit" [disabled]="cargando">{{ cargando ? '...' : ('enter' | i18n) }}</button>
     </form>
 
-    <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+    <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
   </article>
 </section>

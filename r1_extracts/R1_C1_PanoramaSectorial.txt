@@ -1,0 +1,32 @@
+Entrega
+Documento de texto. Éste será breve y responderá al menos a las siguientes cuestiones:
+Clasifique empresas del ámbito software/servicios TIC relevantes para el contexto andaluz/español.
+Indique los ejes de clasificación escogidos (ver siguiente capítulo).
+Destaque 3–5 tendencias clave que impactan en el tipo de proyectos viables.
+Cite las fuentes usadas (mín. 3, recomendadas 5–8).
+Una Imagen (infografía / diagrama / mapa mental / dashboard sencillo): por ejemplo, un diagrama con los sectores y los logos de cada una de las empresas que operan en ellos.
+Posibles ejes de clasificación (elige 3–5, justifícalos)
+Modelo de negocio: Consultoría a medida / SaaS / Outsourcing / Integrador / Formación tecnológica / Ciberseguridad gestionada.
+Vertical o sector cliente: Salud, Educación, Turismo, Agro, Fintech, Administración Pública, Industria 4.0, e-Commerce.
+Tamaño / madurez: Startup (0–10), Micro (≤10), Pyme (11–50), Mediana (51–250), Scale-up (+ crecimiento rápido), Corporación (>250).
+Tecnología predominante: Web full-stack, Mobile, Cloud-native, Data/IA, Ciberseguridad, IoT, ERP/CRM.
+Tipo de entrega: Producto propio / Servicio gestionado / Proyecto cerrado / Fábrica de software (body/augmentation).
+Nivel de regulación impactante: Alto (sanidad, finanzas, AAPP), Medio (e-commerce, datos personales), Bajo (apps internas).
+Intensidad de talento especializado: DevOps, QA, Data, Seguridad, UX, Móvil.
+Algunos ejemplos de tendencias clave.
+Mobile-first / Apps multiplataforma:  la mayoría de usuarios esperan apps que funcionen en móvil, escritorio y web.
+Cloud / APIs / Arquitectura basada en servicios: despliegue en la nube, uso de APIs REST/GraphQL y contenedores; facilita escalado y despliegues reproducibles.
+IA/ML ligera y automatización: incorporar modelos sencillos (clasificación, recomendación) o APIs externas (OpenAI, ML Kit) para valor añadido
+Seguridad y privacidad (GDPR, autenticación fuerte): diseño con seguridad por defecto: hashing de contraseñas, HTTPS, control de accesos, privacidad de datos.
+Integración con hardware / IoT o sostenibilidad digital: cada vez más apps interactúan con sensores o buscan minimizar consumo; proyectos integradores pueden incluir datos reales de dispositivos o métricas de eficiencia.
+Posibles fuentes para usar (Ampliable con propias)
+ONTSI – Informes sectoriales
+INCIBE – Ciberseguridad
+Red.es – Programas y convocatorias
+INE – Estadísticas TIC
+GitHub Octoverse (tendencias tecnológicas)
+Stack Overflow Developer Survey
+Observatorios autonómicos / clústeres TIC andaluces (ej. Andalucía Digital)
+Fundación Andalucia Emprende.
+Portales de empleo (tecnologías más demandadas) – InfoJobs / LinkedIn (usado para inferir demanda de perfiles).
+Blogs corporativos de integradores nacionales (para detectar buzz: IA generativa, low-code, ciber, etc.).

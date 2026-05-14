@@ -1,69 +1,69 @@
 <section class="cabecera-modulo">
   <div>
-    <h2>Inventario de Productos</h2>
-    <p>Controla stock, precio y disponibilidad en tiempo real.</p>
+    <h2>{{ 'products_inventory' | i18n }}</h2>
+    <p>{{ 'inventory_subtitle' | i18n }}</p>
   </div>
 </section>
 
 <section class="panel-kpis">
   <article class="kpi">
-    <p>Total productos</p>
+    <p>{{ 'total_products' | i18n }}</p>
     <strong>{{ cantidadProductos }}</strong>
   </article>
   <article class="kpi">
-    <p>Stock total</p>
+    <p>{{ 'total_stock' | i18n }}</p>
     <strong>{{ stockTotal }}</strong>
   </article>
   <article class="kpi">
-    <p>Valor inventario</p>
+    <p>{{ 'inventory_value' | i18n }}</p>
     <strong>{{ valorInventario | number:'1.2-2' }} €</strong>
   </article>
 </section>
 
 <section class="tarjeta">
-  <h3>Nuevo producto</h3>
+  <h3>{{ 'new_product' | i18n }}</h3>
 
   <form [formGroup]="formularioProducto" (ngSubmit)="crearProducto()" class="formulario">
     <label>
-      Nombre
+      {{ 'name' | i18n }}
       <input type="text" formControlName="nombre" />
       <small *ngIf="formularioProducto.controls['nombre'].touched && formularioProducto.controls['nombre'].invalid">
-        El nombre es obligatorio y debe tener al menos 2 caracteres.
+        {{ 'name_required' | i18n }}
       </small>
     </label>
 
     <label>
-      Precio
+      {{ 'price' | i18n }}
       <input type="number" step="0.01" formControlName="precio" />
       <small *ngIf="formularioProducto.controls['precio'].touched && formularioProducto.controls['precio'].invalid">
-        El precio debe ser mayor que 0.
+        {{ 'price_required' | i18n }}
       </small>
     </label>
 
     <label>
-      Stock
+      {{ 'stock' | i18n }}
       <input type="number" formControlName="stock" />
       <small *ngIf="formularioProducto.controls['stock'].touched && formularioProducto.controls['stock'].invalid">
-        El stock no puede ser negativo.
+        {{ 'stock_required' | i18n }}
       </small>
     </label>
 
-    <button type="submit">Guardar producto</button>
+    <button type="submit">{{ 'save_product' | i18n }}</button>
   </form>
 
-  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
-  <p class="exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+  <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
+  <p class="exito" *ngIf="mensajeExito">{{ mensajeExito | i18n }}</p>
 </section>
 
 <section class="tarjeta">
-  <h3>Listado de inventario</h3>
+  <h3>{{ 'inventory_list' | i18n }}</h3>
   <table>
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Stock</th>
+        <th>{{ 'name' | i18n }}</th>
+        <th>{{ 'price' | i18n }}</th>
+        <th>{{ 'stock' | i18n }}</th>
       </tr>
     </thead>
     <tbody>

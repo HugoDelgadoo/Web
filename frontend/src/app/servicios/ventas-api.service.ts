@@ -25,4 +25,10 @@ export class VentasApiService {
   crearVenta(venta: VentaCrear): Observable<Venta> {
     return this.clienteHttp.post<Venta>(this.urlVentas, venta, { headers: this.crearCabeceras() });
   }
+
+  eliminarVenta(idVenta: number): Observable<{ mensaje: string; id_venta: number }> {
+    return this.clienteHttp.delete<{ mensaje: string; id_venta: number }>(`${this.urlVentas}/${idVenta}`, {
+      headers: this.crearCabeceras()
+    });
+  }
 }

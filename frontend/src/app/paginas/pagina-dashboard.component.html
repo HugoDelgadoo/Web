@@ -1,28 +1,28 @@
 <section class="cabecera-modulo">
-  <h2>Dashboard</h2>
-  <p>Vista general del rendimiento diario y acumulado del supermercado.</p>
+  <h2>{{ 'dashboard' | i18n }}</h2>
+  <p>{{ 'dashboard_subtitle' | i18n }}</p>
 </section>
 
 <section class="panel-kpis">
   <article class="kpi">
-    <p>Ventas del día</p>
+    <p>{{ 'todays_sales' | i18n }}</p>
     <strong>{{ resumen.ventas_del_dia | number:'1.2-2' }} €</strong>
   </article>
   <article class="kpi">
-    <p>Total acumulado</p>
+    <p>{{ 'total_accumulated' | i18n }}</p>
     <strong>{{ resumen.total_acumulado | number:'1.2-2' }} €</strong>
   </article>
   <article class="kpi alerta">
-    <p>Alertas stock bajo</p>
+    <p>{{ 'low_stock_alerts' | i18n }}</p>
     <strong>{{ resumen.alertas_stock_bajo }}</strong>
   </article>
 </section>
 
 <section class="tarjeta-grafico">
-  <h3>Tendencia diaria de ventas</h3>
+  <h3>{{ 'daily_sales_trend' | i18n }}</h3>
   <div class="contenedor-grafico">
     <canvas baseChart [data]="configuracionLinea" [options]="opcionesGrafico" [type]="'line'"></canvas>
   </div>
 </section>
 
-<p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+<p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>

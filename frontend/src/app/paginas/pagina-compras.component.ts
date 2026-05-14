@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ItemListaPedido } from '../modelos/compra';
+import { I18nPipe } from '../pipes/i18n.pipe';
 import { ComprasApiService } from '../servicios/compras-api.service';
 import { RolService } from '../servicios/rol.service';
 
 @Component({
   selector: 'app-pagina-compras',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, I18nPipe],
   templateUrl: './pagina-compras.component.html',
   styleUrl: './pagina-compras.component.css'
 })
@@ -32,17 +33,17 @@ export class PaginaComprasComponent implements OnInit {
         this.listaPedido = lista;
         this.mensajeError = '';
       },
-      error: () => (this.mensajeError = 'No se pudo cargar la lista de pedido (requiere rol Admin).')
+      error: () => (this.mensajeError = 'err_purchase_list')
     });
   }
 
   generarPedido(): void {
     this.comprasApiService.generarPedido('Pedido generado desde frontend').subscribe({
       next: (respuesta) => {
-        this.mensaje = respuesta.mensaje;
+        this.mensaje = 'ok_purchase_create';
         this.cargarListaPedido();
       },
-      error: () => (this.mensajeError = 'No se pudo generar el pedido de compra.')
+      error: () => (this.mensajeError = 'err_purchase_create')
     });
   }
 }

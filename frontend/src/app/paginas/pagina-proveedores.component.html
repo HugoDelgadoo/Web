@@ -1,24 +1,31 @@
 <section class="tarjeta" *ngIf="esAdmin">
-  <h2>Módulo de Proveedores</h2>
+  <h2>{{ 'providers_module' | i18n }}</h2>
   <form [formGroup]="formularioProveedor" (ngSubmit)="crearProveedor()" class="formulario">
-    <input type="text" placeholder="Nombre proveedor" formControlName="nombre" />
-    <input type="text" placeholder="Contacto" formControlName="contacto" />
-    <input type="text" placeholder="Categoría" formControlName="categoria" />
-    <button type="submit">Guardar</button>
+    <input type="text" [placeholder]="'provider_name' | i18n" formControlName="nombre" />
+    <input type="text" [placeholder]="'contact' | i18n" formControlName="contacto" />
+    <input type="text" [placeholder]="'category' | i18n" formControlName="categoria" />
+    <button type="submit">{{ 'save' | i18n }}</button>
   </form>
-  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+  <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
 </section>
 
 <section class="tarjeta">
-  <h2>Proveedores</h2>
+  <h2>{{ 'providers' | i18n }}</h2>
   <table>
-    <thead><tr><th>Nombre</th><th>Contacto</th><th>Categoría</th><th>Activo</th></tr></thead>
+    <thead>
+      <tr>
+        <th>{{ 'name' | i18n }}</th>
+        <th>{{ 'contact' | i18n }}</th>
+        <th>{{ 'category' | i18n }}</th>
+        <th>{{ 'active' | i18n }}</th>
+      </tr>
+    </thead>
     <tbody>
       <tr *ngFor="let proveedor of proveedores">
         <td>{{ proveedor.nombre }}</td>
         <td>{{ proveedor.contacto }}</td>
         <td>{{ proveedor.categoria }}</td>
-        <td>{{ proveedor.activo ? 'Sí' : 'No' }}</td>
+        <td>{{ proveedor.activo ? ('yes' | i18n) : ('no' | i18n) }}</td>
       </tr>
     </tbody>
   </table>

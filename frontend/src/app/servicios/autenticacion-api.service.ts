@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { CredencialesInicioSesion, UsuarioSesion } from '../modelos/sesion';
 
@@ -11,6 +12,8 @@ export class AutenticacionApiService {
   constructor(private readonly clienteHttp: HttpClient) {}
 
   iniciarSesion(credenciales: CredencialesInicioSesion): Observable<UsuarioSesion> {
-    return this.clienteHttp.post<UsuarioSesion>(`${this.urlAuth}/login`, credenciales);
+    return this.clienteHttp
+      .post<UsuarioSesion>(`${this.urlAuth}/login`, credenciales)
+      .pipe(timeout(10000));
   }
 }

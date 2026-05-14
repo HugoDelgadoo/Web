@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
-import { DashboardApiService } from '../servicios/dashboard-api.service';
+import { BaseChartDirective } from 'ng2-charts';
 import { ResumenDashboard } from '../modelos/dashboard';
+import { I18nPipe } from '../pipes/i18n.pipe';
+import { DashboardApiService } from '../servicios/dashboard-api.service';
 import { RolService } from '../servicios/rol.service';
 
 @Component({
   selector: 'app-pagina-dashboard',
   standalone: true,
-  imports: [CommonModule, BaseChartDirective],
+  imports: [CommonModule, BaseChartDirective, I18nPipe],
   templateUrl: './pagina-dashboard.component.html',
   styleUrl: './pagina-dashboard.component.css'
 })
 export class PaginaDashboardComponent implements OnInit {
+  @ViewChild(BaseChartDirective) grafico?: BaseChartDirective;
+
   resumen: ResumenDashboard = { ventas_del_dia: 0, total_acumulado: 0, alertas_stock_bajo: 0 };
   mensajeError = '';
 
@@ -53,18 +56,32 @@ export class PaginaDashboardComponent implements OnInit {
 
   private cargarResumen(): void {
     this.dashboardApiService.obtenerResumen().subscribe({
-      next: (resumen) => (this.resumen = resumen),
-      error: () => (this.mensajeError = 'No se pudo cargar el resumen del dashboard.')
+      next: (resumen) => {
+        this.resumen = resumen;
+        this.mensajeError = '';
+      },
+      error: () => (this.mensajeError = 'err_dashboard_summary')
     });
   }
 
   private cargarTendencia(): void {
     this.dashboardApiService.obtenerTendencia(14).subscribe({
       next: (datos) => {
-        this.configuracionLinea.labels = datos.map((p) => p.fecha);
-        this.configuracionLinea.datasets[0].data = datos.map((p) => p.total);
+        const etiquetas = datos.map((p) => p.fecha);
+        const valores = datos.map((p) => Number(p.total) || 0);
+        this.configuracionLinea = {
+          labels: etiquetas,
+          datasets: [
+            {
+              ...this.configuracionLinea.datasets[0],
+              data: valores
+            }
+          ]
+        };
+        this.grafico?.update();
+        this.mensajeError = '';
       },
-      error: () => (this.mensajeError = 'No se pudo cargar la tendencia de ventas.')
+      error: () => (this.mensajeError = 'err_dashboard_trend')
     });
   }
 }

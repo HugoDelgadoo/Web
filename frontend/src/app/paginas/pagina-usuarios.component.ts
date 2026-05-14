@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuario } from '../modelos/usuario';
+import { I18nPipe } from '../pipes/i18n.pipe';
 import { RolService } from '../servicios/rol.service';
 import { UsuariosApiService } from '../servicios/usuarios-api.service';
 
 @Component({
   selector: 'app-pagina-usuarios',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nPipe],
   templateUrl: './pagina-usuarios.component.html',
   styleUrl: './pagina-usuarios.component.css'
 })
@@ -42,7 +43,7 @@ export class PaginaUsuariosComponent implements OnInit {
         this.usuarios = usuarios;
         this.mensajeError = '';
       },
-      error: () => (this.mensajeError = 'No se pudo cargar usuarios (requiere rol Admin).')
+      error: () => (this.mensajeError = 'err_users_load')
     });
   }
 
@@ -61,11 +62,11 @@ export class PaginaUsuariosComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.mensajeExito = 'Usuario creado correctamente.';
+          this.mensajeExito = 'ok_user_create';
           this.mensajeError = '';
           this.cargarUsuarios();
         },
-        error: () => (this.mensajeError = 'No se pudo crear el usuario.')
+        error: () => (this.mensajeError = 'err_user_create')
       });
   }
 }

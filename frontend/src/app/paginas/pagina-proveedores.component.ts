@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Proveedor } from '../modelos/proveedor';
+import { I18nPipe } from '../pipes/i18n.pipe';
 import { ProveedoresApiService } from '../servicios/proveedores-api.service';
 import { RolService } from '../servicios/rol.service';
 import { SesionService } from '../servicios/sesion.service';
@@ -9,7 +10,7 @@ import { SesionService } from '../servicios/sesion.service';
 @Component({
   selector: 'app-pagina-proveedores',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nPipe],
   templateUrl: './pagina-proveedores.component.html',
   styleUrl: './pagina-proveedores.component.css'
 })
@@ -48,7 +49,7 @@ export class PaginaProveedoresComponent implements OnInit {
         this.proveedores = proveedores;
         this.mensajeError = '';
       },
-      error: () => (this.mensajeError = 'No se pudo cargar proveedores (requiere rol Admin).')
+      error: () => (this.mensajeError = 'err_providers_load')
     });
   }
 
@@ -67,7 +68,7 @@ export class PaginaProveedoresComponent implements OnInit {
       })
       .subscribe({
         next: () => this.cargarProveedores(),
-        error: () => (this.mensajeError = 'No se pudo crear el proveedor.')
+        error: () => (this.mensajeError = 'err_provider_create')
       });
   }
 }

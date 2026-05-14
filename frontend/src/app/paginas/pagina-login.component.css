@@ -6,11 +6,12 @@
 
 .tarjeta-login {
   width: min(430px, 92vw);
-  background: #fff;
-  border: 1px solid #d8e4f3;
+  background: rgba(17, 29, 54, 0.74);
+  border: 1px solid rgba(134, 163, 255, 0.24);
   border-radius: 14px;
   padding: 22px;
-  box-shadow: 0 14px 32px rgba(32, 63, 112, 0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(8px);
 }
 
 .tarjeta-login h2 {
@@ -19,7 +20,7 @@
 
 .tarjeta-login p {
   margin: 0 0 14px;
-  color: #5a7399;
+  color: #8fa8d9;
 }
 
 form {
@@ -28,14 +29,16 @@ form {
 }
 
 label {
-  color: #28466f;
+  color: #bbcefa;
   font-weight: 700;
 }
 
 input {
   padding: 10px;
-  border: 1px solid #c6d7ee;
+  border: 1px solid rgba(146, 174, 255, 0.3);
   border-radius: 8px;
+  background: rgba(11, 21, 42, 0.7);
+  color: #eaf0ff;
 }
 
 button {
@@ -55,6 +58,6 @@ button[disabled] {
 }
 
 .error {
-  color: #b43737;
+  color: #ff8f8f;
   margin-top: 12px;
 }

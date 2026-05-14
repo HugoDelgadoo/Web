@@ -1,15 +1,20 @@
 <section class="tarjeta">
-  <h2>Módulo de Compras</h2>
-  <p>Productos por debajo de stock mínimo y sugerencia de reposición.</p>
-  <button type="button" (click)="generarPedido()">Generar pedido de compra</button>
-  <p class="exito" *ngIf="mensaje">{{ mensaje }}</p>
-  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+  <h2>{{ 'purchases_module' | i18n }}</h2>
+  <p>{{ 'purchases_subtitle' | i18n }}</p>
+  <button type="button" (click)="generarPedido()">{{ 'generate_purchase_order' | i18n }}</button>
+  <p class="exito" *ngIf="mensaje">{{ mensaje | i18n }}</p>
+  <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
 </section>
 
 <section class="tarjeta">
   <table>
     <thead>
-      <tr><th>Producto</th><th>Stock</th><th>Mínimo</th><th>Cantidad sugerida</th></tr>
+      <tr>
+        <th>{{ 'products_inventory' | i18n }}</th>
+        <th>{{ 'stock' | i18n }}</th>
+        <th>{{ 'minimum' | i18n }}</th>
+        <th>{{ 'suggested_quantity' | i18n }}</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of listaPedido">

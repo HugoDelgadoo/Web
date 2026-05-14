@@ -1,34 +1,35 @@
 <div class="fondo-app">
-  <ng-container *ngIf="autenticado; else vistaLogin">
-    <header class="barra-superior">
-      <div>
-        <h1>{{ nombreAplicacion }}</h1>
-      </div>
-      <div class="usuario-info">
-        <strong>{{ usuarioNombre }}</strong>
-        <span>{{ rolActual }}</span>
-        <button type="button" (click)="cerrarSesion()">Salir</button>
-      </div>
-    </header>
-
-    <div class="panel-principal">
-      <aside class="barra-lateral">
-        <a *ngIf="rolActual === 'Admin'" routerLink="/dashboard" routerLinkActive="activo">Dashboard</a>
-        <a routerLink="/productos" routerLinkActive="activo">Inventario</a>
-        <a routerLink="/ventas" routerLinkActive="activo">Ventas</a>
-        <a *ngIf="rolActual === 'Admin'" routerLink="/usuarios" routerLinkActive="activo">Usuarios y Roles</a>
-        <a routerLink="/proveedores" routerLinkActive="activo">Proveedores</a>
-        <a *ngIf="rolActual === 'Admin'" routerLink="/compras" routerLinkActive="activo">Compras</a>
-        <a routerLink="/caducidad" routerLinkActive="activo">Caducidad</a>
-      </aside>
-
-      <main class="contenido">
-        <router-outlet></router-outlet>
-      </main>
+  <header class="barra-superior" *ngIf="mostrarShell">
+    <div>
+      <h1>{{ 'app_title' | i18n }}</h1>
     </div>
-  </ng-container>
+    <div class="usuario-info">
+      <strong>{{ usuarioNombre }}</strong>
+      <span>{{ rolActual }}</span>
+      <button type="button" class="boton-idioma" (click)="cambiarIdioma()">
+        {{ idiomaActual === 'es' ? 'EN' : 'ES' }}
+      </button>
+      <button type="button" (click)="cerrarSesion()">{{ 'logout' | i18n }}</button>
+    </div>
+  </header>
 
-  <ng-template #vistaLogin>
-    <router-outlet></router-outlet>
-  </ng-template>
+  <button type="button" class="boton-idioma-login" *ngIf="!mostrarShell" (click)="cambiarIdioma()">
+    {{ idiomaActual === 'es' ? 'EN' : 'ES' }}
+  </button>
+
+  <div class="panel-principal" [class.panel-login]="!mostrarShell">
+    <aside class="barra-lateral" *ngIf="mostrarShell">
+      <a *ngIf="rolActual === 'Admin'" routerLink="/dashboard" routerLinkActive="activo">{{ 'dashboard' | i18n }}</a>
+      <a routerLink="/productos" routerLinkActive="activo">{{ 'inventory' | i18n }}</a>
+      <a routerLink="/ventas" routerLinkActive="activo">{{ 'sales' | i18n }}</a>
+      <a *ngIf="rolActual === 'Admin'" routerLink="/usuarios" routerLinkActive="activo">{{ 'users_roles' | i18n }}</a>
+      <a routerLink="/proveedores" routerLinkActive="activo">{{ 'providers' | i18n }}</a>
+      <a *ngIf="rolActual === 'Admin'" routerLink="/compras" routerLinkActive="activo">{{ 'purchases' | i18n }}</a>
+      <a routerLink="/caducidad" routerLinkActive="activo">{{ 'expiry' | i18n }}</a>
+    </aside>
+
+    <main [class.contenido]="mostrarShell" [class.contenido-login]="!mostrarShell">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

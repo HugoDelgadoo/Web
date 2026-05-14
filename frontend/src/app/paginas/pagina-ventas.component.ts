@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Venta } from '../modelos/venta';
+import { I18nPipe } from '../pipes/i18n.pipe';
 import { VentasApiService } from '../servicios/ventas-api.service';
 
 @Component({
   selector: 'app-pagina-ventas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nPipe],
   templateUrl: './pagina-ventas.component.html',
   styleUrl: './pagina-ventas.component.css'
 })
@@ -47,7 +48,7 @@ export class PaginaVentasComponent implements OnInit {
         this.mensajeError = '';
       },
       error: () => {
-        this.mensajeError = 'No se pudieron cargar las ventas.';
+        this.mensajeError = 'err_sales_load';
       }
     });
   }
@@ -68,12 +69,26 @@ export class PaginaVentasComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.mensajeExito = 'Venta registrada correctamente.';
+          this.mensajeExito = 'ok_sale_create';
           this.cargarVentas();
         },
         error: () => {
-          this.mensajeError = 'No se pudo registrar la venta.';
+          this.mensajeError = 'err_sale_create';
         }
       });
+  }
+
+  eliminarVenta(idVenta: number): void {
+    this.mensajeError = '';
+    this.mensajeExito = '';
+    this.ventasApiService.eliminarVenta(idVenta).subscribe({
+      next: () => {
+        this.mensajeExito = 'ok_sale_delete';
+        this.cargarVentas();
+      },
+      error: () => {
+        this.mensajeError = 'err_sale_delete';
+      }
+    });
   }
 }

@@ -1,12 +1,19 @@
 <section class="tarjeta">
-  <h2>Control de Caducidad</h2>
-  <p>Productos que caducan en menos de 7 días.</p>
-  <p class="error" *ngIf="mensajeError">{{ mensajeError }}</p>
+  <h2>{{ 'expiry_control' | i18n }}</h2>
+  <p>{{ 'expiry_subtitle' | i18n }}</p>
+  <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
 </section>
 
 <section class="tarjeta">
   <table>
-    <thead><tr><th>Producto</th><th>Stock</th><th>Caduca</th><th>Días restantes</th></tr></thead>
+    <thead>
+      <tr>
+        <th>{{ 'products_inventory' | i18n }}</th>
+        <th>{{ 'stock' | i18n }}</th>
+        <th>{{ 'expires' | i18n }}</th>
+        <th>{{ 'days_left' | i18n }}</th>
+      </tr>
+    </thead>
     <tbody>
       <tr *ngFor="let producto of productos" class="fila-alerta">
         <td>{{ producto.nombre }}</td>

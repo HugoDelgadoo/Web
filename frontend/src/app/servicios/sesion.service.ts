@@ -13,7 +13,12 @@ export class SesionService {
   constructor(
     private readonly autenticacionApiService: AutenticacionApiService,
     private readonly rolService: RolService
-  ) {}
+  ) {
+    const usuario = this.usuarioActualSubject.value;
+    if (usuario) {
+      this.rolService.guardarRol(usuario.rol);
+    }
+  }
 
   estaAutenticado(): boolean {
     return this.usuarioActualSubject.value !== null;
