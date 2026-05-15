@@ -2,6 +2,8 @@
 .formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
 input { padding: 8px; border: 1px solid rgba(146, 174, 255, 0.3); border-radius: 8px; background: rgba(11, 21, 42, 0.7); color: #eaf0ff; }
 button { padding: 10px 14px; border: 0; border-radius: 8px; background: linear-gradient(135deg,#2f7cf6,#245fcc); color: #fff; font-weight: 700; }
+.boton-papelera { width: 34px; height: 34px; padding: 0; display: inline-grid; place-items: center; border-radius: 8px; background: rgba(255, 102, 102, 0.18); border: 1px solid rgba(255, 120, 120, 0.35); }
+.boton-papelera svg { width: 16px; height: 16px; fill: #ff9f9f; }
 table { width: 100%; border-collapse: collapse; }
 th, td { border-bottom: 1px solid rgba(129, 160, 239, 0.22); text-align: left; padding: 10px 8px; }
 th { color: #99b3e8; }

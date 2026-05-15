@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+﻿import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ResumenDashboard } from '../modelos/dashboard';
@@ -16,6 +17,7 @@ import { RolService } from '../servicios/rol.service';
 })
 export class PaginaDashboardComponent implements OnInit {
   @ViewChild(BaseChartDirective) grafico?: BaseChartDirective;
+  private readonly destroyRef = inject(DestroyRef);
 
   resumen: ResumenDashboard = { ventas_del_dia: 0, total_acumulado: 0, alertas_stock_bajo: 0 };
   mensajeError = '';
@@ -25,7 +27,7 @@ export class PaginaDashboardComponent implements OnInit {
     datasets: [
       {
         data: [],
-        label: 'Ventas diarias (€)',
+        label: 'Ventas diarias (EUR)',
         fill: true,
         tension: 0.35,
         borderColor: '#2f7cf6',
@@ -48,10 +50,12 @@ export class PaginaDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.cargarResumen();
     this.cargarTendencia();
-    this.rolService.rolActual$.subscribe(() => {
-      this.cargarResumen();
-      this.cargarTendencia();
-    });
+    this.rolService.rolActual$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        this.cargarResumen();
+        this.cargarTendencia();
+      });
   }
 
   private cargarResumen(): void {
@@ -67,6 +71,7 @@ export class PaginaDashboardComponent implements OnInit {
   private cargarTendencia(): void {
     this.dashboardApiService.obtenerTendencia(14).subscribe({
       next: (datos) => {
+        // Dejamos el grafico listo con etiquetas y valores en una sola pasada.
         const etiquetas = datos.map((p) => p.fecha);
         const valores = datos.map((p) => Number(p.total) || 0);
         this.configuracionLinea = {

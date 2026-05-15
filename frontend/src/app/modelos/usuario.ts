@@ -11,4 +11,5 @@ export interface UsuarioCrear {
   email: string;
   rol: 'Admin' | 'Empleado';
   activo: boolean;
+  clave_acceso: string;
 }

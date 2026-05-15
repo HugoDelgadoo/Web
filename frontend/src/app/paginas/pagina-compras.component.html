@@ -14,6 +14,7 @@
         <th>{{ 'stock' | i18n }}</th>
         <th>{{ 'minimum' | i18n }}</th>
         <th>{{ 'suggested_quantity' | i18n }}</th>
+        <th>{{ 'actions' | i18n }}</th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +23,13 @@
         <td>{{ item.stock_actual }}</td>
         <td>{{ item.stock_minimo }}</td>
         <td>{{ item.cantidad_sugerida }}</td>
+        <td>
+          <button type="button" class="boton-papelera" (click)="quitarProductoLista(item.id_producto)" [title]="'remove_from_list' | i18n">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM7 9h2v9H7V9z"/>
+            </svg>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

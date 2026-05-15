@@ -3,12 +3,21 @@
   <form [formGroup]="formularioUsuario" (ngSubmit)="crearUsuario()" class="formulario">
     <input type="text" [placeholder]="'name' | i18n" formControlName="nombre" />
     <input type="email" [placeholder]="'email' | i18n" formControlName="email" />
+    <input type="password" [placeholder]="'access_key' | i18n" formControlName="clave_acceso" />
     <select formControlName="rol">
       <option value="Empleado">Empleado</option>
       <option value="Admin">Admin</option>
     </select>
-    <button type="submit">{{ 'save' | i18n }}</button>
+    <button type="submit" [disabled]="guardando">
+      {{ guardando ? ('saving' | i18n) : ('save' | i18n) }}
+    </button>
   </form>
+  <small class="error" *ngIf="formularioUsuario.controls['nombre'].touched && formularioUsuario.controls['nombre'].invalid">
+    {{ 'name_required' | i18n }}
+  </small>
+  <small class="error" *ngIf="formularioUsuario.controls['clave_acceso'].touched && formularioUsuario.controls['clave_acceso'].invalid">
+    {{ 'access_key_required' | i18n }}
+  </small>
   <p class="error" *ngIf="mensajeError">{{ mensajeError | i18n }}</p>
   <p class="exito" *ngIf="mensajeExito">{{ mensajeExito | i18n }}</p>
 </section>
@@ -21,6 +30,7 @@
         <th>{{ 'email' | i18n }}</th>
         <th>{{ 'role' | i18n }}</th>
         <th>{{ 'active' | i18n }}</th>
+        <th>{{ 'actions' | i18n }}</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +39,13 @@
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.rol }}</td>
         <td>{{ usuario.activo ? ('yes' | i18n) : ('no' | i18n) }}</td>
+        <td>
+          <button type="button" class="boton-papelera" (click)="eliminarUsuario(usuario.id)" [title]="'err_user_delete' | i18n">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 3h6l1 2h4v2H4V5h4l1-2zm1 6h2v9h-2V9zm4 0h2v9h-2V9zM7 9h2v9H7V9z"/>
+            </svg>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

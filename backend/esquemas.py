@@ -70,6 +70,7 @@ class EmpleadoBase(BaseModel):
     email: str = Field(min_length=6, max_length=160)
     rol: str = Field(pattern="^(Admin|Empleado)$")
     activo: bool = True
+    clave_acceso: str = Field(min_length=4, max_length=120)
 
 
 class EmpleadoCrear(EmpleadoBase):
@@ -81,6 +82,7 @@ class EmpleadoActualizar(BaseModel):
     email: Optional[str] = Field(default=None, min_length=6, max_length=160)
     rol: Optional[str] = Field(default=None, pattern="^(Admin|Empleado)$")
     activo: Optional[bool] = None
+    clave_acceso: Optional[str] = Field(default=None, min_length=4, max_length=120)
 
 
 class ProveedorBase(BaseModel):

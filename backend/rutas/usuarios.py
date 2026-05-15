@@ -49,3 +49,16 @@ def actualizar_usuario(
         raise
     except Exception as error:
         raise HTTPException(status_code=500, detail=f"Error al actualizar usuario: {error}") from error
+
+
+@enrutador_usuarios.delete("/{id_usuario}")
+def eliminar_usuario(id_usuario: int, _: str = Depends(requerir_rol(ROL_ADMIN))) -> dict:
+    try:
+        respuesta = cliente_supabase.table("empleados").delete().eq("id", id_usuario).execute()
+        if not respuesta.data:
+            raise HTTPException(status_code=404, detail="Usuario no encontrado")
+        return {"mensaje": "Usuario eliminado correctamente", "id_usuario": id_usuario}
+    except HTTPException:
+        raise
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=f"Error al eliminar usuario: {error}") from error

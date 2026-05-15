@@ -1,5 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+﻿import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Proveedor } from '../modelos/proveedor';
 import { I18nPipe } from '../pipes/i18n.pipe';
@@ -17,8 +18,11 @@ import { SesionService } from '../servicios/sesion.service';
 export class PaginaProveedoresComponent implements OnInit {
   proveedores: Proveedor[] = [];
   mensajeError = '';
+  mensajeExito = '';
   esAdmin = false;
+  guardando = false;
   formularioProveedor!: ReturnType<FormBuilder['group']>;
+  private readonly destroyRef = inject(DestroyRef);
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -37,10 +41,12 @@ export class PaginaProveedoresComponent implements OnInit {
   ngOnInit(): void {
     this.esAdmin = this.sesionService.obtenerRolActual() === 'Admin';
     this.cargarProveedores();
-    this.rolService.rolActual$.subscribe((rol) => {
-      this.esAdmin = rol === 'Admin';
-      this.cargarProveedores();
-    });
+    this.rolService.rolActual$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((rol) => {
+        this.esAdmin = rol === 'Admin';
+        this.cargarProveedores();
+      });
   }
 
   cargarProveedores(): void {
@@ -54,11 +60,14 @@ export class PaginaProveedoresComponent implements OnInit {
   }
 
   crearProveedor(): void {
+    this.mensajeError = '';
+    this.mensajeExito = '';
     if (this.formularioProveedor.invalid) {
       this.formularioProveedor.markAllAsTouched();
       return;
     }
     const valor = this.formularioProveedor.getRawValue();
+    this.guardando = true;
     this.proveedoresApiService
       .crearProveedor({
         nombre: valor.nombre ?? '',
@@ -67,8 +76,35 @@ export class PaginaProveedoresComponent implements OnInit {
         activo: Boolean(valor.activo)
       })
       .subscribe({
-        next: () => this.cargarProveedores(),
-        error: () => (this.mensajeError = 'err_provider_create')
+        next: () => {
+          this.guardando = false;
+          this.mensajeExito = 'ok_provider_create';
+          this.formularioProveedor.reset({
+            nombre: '',
+            contacto: '',
+            categoria: '',
+            activo: true
+          });
+          this.cargarProveedores();
+        },
+        error: () => {
+          this.guardando = false;
+          this.mensajeError = 'err_provider_create';
+        }
       });
+  }
+
+  eliminarProveedor(idProveedor: number): void {
+    this.mensajeError = '';
+    this.mensajeExito = '';
+    this.proveedoresApiService.eliminarProveedor(idProveedor).subscribe({
+      next: () => {
+        this.mensajeExito = 'ok_provider_delete';
+        this.cargarProveedores();
+      },
+      error: () => {
+        this.mensajeError = 'err_provider_delete';
+      }
+    });
   }
 }

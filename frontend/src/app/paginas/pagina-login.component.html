@@ -4,8 +4,8 @@
     <p>{{ 'login_subtitle' | i18n }}</p>
 
     <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
-      <label>{{ 'user' | i18n }}</label>
-      <input type="text" formControlName="email" [placeholder]="'user' | i18n" />
+      <label>Email o usuario</label>
+      <input type="text" formControlName="email" placeholder="Email o usuario" />
 
       <label>{{ 'password' | i18n }}</label>
       <input type="password" formControlName="clave_acceso" placeholder="********" />

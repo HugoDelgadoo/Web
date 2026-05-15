@@ -51,3 +51,16 @@ def actualizar_proveedor(
         raise
     except Exception as error:
         raise HTTPException(status_code=500, detail=f"Error al actualizar proveedor: {error}") from error
+
+
+@enrutador_proveedores.delete("/{id_proveedor}")
+def eliminar_proveedor(id_proveedor: int, _: str = Depends(requerir_rol(ROL_ADMIN))) -> dict:
+    try:
+        respuesta = cliente_supabase.table("proveedores").delete().eq("id", id_proveedor).execute()
+        if not respuesta.data:
+            raise HTTPException(status_code=404, detail="Proveedor no encontrado")
+        return {"mensaje": "Proveedor eliminado correctamente", "id_proveedor": id_proveedor}
+    except HTTPException:
+        raise
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=f"Error al eliminar proveedor: {error}") from error

@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Proveedor, ProveedorCrear } from '../modelos/proveedor';
+import { crearCabecerasConRol } from './cabeceras-rol';
 import { RolService } from './rol.service';
 
 @Injectable({ providedIn: 'root' })
@@ -14,19 +15,22 @@ export class ProveedoresApiService {
     private readonly rolService: RolService
   ) {}
 
-  private crearCabeceras(): HttpHeaders {
-    return new HttpHeaders({ 'X-Rol': this.rolService.obtenerRolActual() });
-  }
-
   listarProveedores(): Observable<Proveedor[]> {
     return this.clienteHttp.get<Proveedor[]>(this.urlProveedores, {
-      headers: this.crearCabeceras()
+      headers: crearCabecerasConRol(this.rolService)
     });
   }
 
   crearProveedor(proveedor: ProveedorCrear): Observable<Proveedor> {
     return this.clienteHttp.post<Proveedor>(this.urlProveedores, proveedor, {
-      headers: this.crearCabeceras()
+      headers: crearCabecerasConRol(this.rolService)
     });
+  }
+
+  eliminarProveedor(idProveedor: number): Observable<{ mensaje: string; id_proveedor: number }> {
+    return this.clienteHttp.delete<{ mensaje: string; id_proveedor: number }>(
+      `${this.urlProveedores}/${idProveedor}`,
+      { headers: crearCabecerasConRol(this.rolService) }
+    );
   }
 }
